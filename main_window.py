@@ -1,5 +1,6 @@
 import sys
-from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5 import QtWidgets
+from PyQt5 import QtCore
 
 from function import get_usd
 
@@ -13,8 +14,6 @@ class Window(QtWidgets.QMainWindow):
         self.select_folder_button = QtWidgets.QPushButton("Выбрать папку")
         self.select_folder_button.clicked.connect(self.select_folder)
 
-        self.create_dataset_button = QtWidgets.QPushButton("Создать датасет")
-        self.create_dataset_button.clicked.connect(self.create_dataset)
 
         self.date_input = QtWidgets.QDateEdit()
         self.date_input.setCalendarPopup(True)
@@ -27,7 +26,6 @@ class Window(QtWidgets.QMainWindow):
         layout = QtWidgets.QVBoxLayout()
         layout.addWidget(self.label)
         layout.addWidget(self.select_folder_button)
-        layout.addWidget(self.create_dataset_button)
         layout.addWidget(self.date_input)
         layout.addWidget(self.get_data_button)
 
@@ -51,15 +49,7 @@ class Window(QtWidgets.QMainWindow):
         main_date = self.date_input.date().toString(QtCore.Qt.ISODate)
         self.find_course(main_date)
 
-    def create_dataset(self):
-        if not self.folderpath:
-            QtWidgets.QMessageBox.warning(self, 'Ошибка', 'Выберите папку с исходным датасетом')
-            return
-
-        self.destination_folder = QtWidgets.QFileDialog.getExistingDirectory(self, 'Выберите папку для нового датасета')
-        if self.destination_folder:
-            self.menu = NewData(self)
-            self.menu.show()
+    
     def find_course(self, main_date):
         course = get_usd(main_date)
         if course == None:
@@ -69,8 +59,7 @@ class Window(QtWidgets.QMainWindow):
             QtWidgets.QMessageBox.information(self, 'Данные получены',
                                               f'Курс доллара на {main_date} равен {course} руб')
 
-class NewData(QtWidgets):
-    pass
+
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     window = Window()
