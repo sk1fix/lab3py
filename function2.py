@@ -54,7 +54,7 @@ def get_normalname(my_date: str) -> str:
 #             if str(my_date) == str(begining_data):
 #                 current_datef = get_cur_date(my_date)
 #             my_date -= datetime.timedelta(days=1)
-def get_usd() -> None:
+def get_usd2() -> None:
     f = open('data.csv', 'r', encoding="utf-8")
     s = csv.reader(f)
     index = 0

@@ -35,7 +35,7 @@ import csv
 #                 my_date -= datetime.timedelta(days=1)
 
 
-def get_usd() -> None:
+def get_usd1() -> None:
     f = open('data.csv', 'r', encoding="utf-8")
     s = csv.reader(f)
     with open('X.csv', 'w', newline='', encoding="utf-8") as xfile:

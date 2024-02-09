@@ -62,7 +62,7 @@ def get_date(my_date: str) -> datetime.date:
 #             my_date -= datetime.timedelta(days=1)
 
 
-def get_usd() -> None:
+def get_usd3() -> None:
     f = open('data.csv', 'r', encoding="utf-8")
     s = csv.reader(f)
     index = -1
