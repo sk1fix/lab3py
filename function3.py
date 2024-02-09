@@ -82,6 +82,3 @@ def get_usd() -> None:
             begining_datef = current_datef-datetime.timedelta(days=6)
             index = 6
 
-
-def main() -> None:
-    get_usd()

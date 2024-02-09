@@ -72,5 +72,3 @@ def get_usd() -> None:
             wr.writerow(row[0].split(',') + row[1].split(','))
 
 
-def main() -> None:
-    get_usd()

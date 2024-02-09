@@ -93,7 +93,23 @@ class NewData(QtWidgets.QDialog):
 
         self.setLayout(layout)
 
-        
+        def but1(self):
+            split_by_columns(self.Main.folderpath)
+            QtWidgets.QMessageBox.information(self, 'Датасет создан',
+                                            f'Датасет создан и сохранен в {self.Main.destination_folder}')
+            self.close()
+
+        def but2(self):
+            split_by_years(self.Main.folderpath, self.Main.destination_folder)
+            QtWidgets.QMessageBox.information(self, 'Датасет создан',
+                                            f'Датасет создан и сохранен в {self.Main.destination_folder}')
+            self.close()
+
+        def but3(self):
+            split_by_weeks(self.Main.folderpath, self.Main.destination_folder)
+            QtWidgets.QMessageBox.information(self, 'Датасет создан',
+                                            f'Датасет создан и сохранен в {self.Main.destination_folder}')
+            self.close()
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     window = Window()

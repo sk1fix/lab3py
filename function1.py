@@ -47,5 +47,3 @@ def get_usd() -> None:
                 wry.writerow(row[1].split(','))
 
 
-def main() -> None:
-    get_usd()
