@@ -62,8 +62,8 @@ def get_date(my_date: str) -> datetime.date:
 #             my_date -= datetime.timedelta(days=1)
 
 
-def get_usd3() -> None:
-    f = open('data.csv', 'r', encoding="utf-8")
+def get_usd3(path: str, path1: str) -> None:
+    f = open(path, 'r', encoding="utf-8")
     s = csv.reader(f)
     index = -1
     for row in s:
@@ -73,7 +73,7 @@ def get_usd3() -> None:
             index = week
             begining_datef = get_date(current_datef) - \
                 datetime.timedelta(days=week)
-        with open(get_normalname(str(begining_datef)) + "_" + get_normalname(str(current_datef)) + '.csv', 'a', newline='', encoding="utf-8") as file:
+        with open(path1 + "/" + get_normalname(str(begining_datef)) + "_" + get_normalname(str(current_datef)) + '.csv', 'a', newline='', encoding="utf-8") as file:
             wr = csv.writer(file)
             wr.writerow(row[0].split(',') + row[1].split(','))
             index -= 1

@@ -9,7 +9,7 @@ from function3 import get_usd3
 
 
 class Window(QtWidgets.QMainWindow):
-    def __init__(self) -> None: 
+    def __init__(self) -> None:
         super().__init__()
         self.folderpath = None
         self.menu = None
@@ -67,14 +67,16 @@ class Window(QtWidgets.QMainWindow):
             selecting a folder for a new dataset
         """
         if not self.folderpath:
-            QtWidgets.QMessageBox.warning(self, 'Ошибка', 'Выберите папку с исходным датасетом')
+            QtWidgets.QMessageBox.warning(
+                self, 'Ошибка', 'Выберите папку с исходным датасетом')
             return
 
-        self.destination_folder = QtWidgets.QFileDialog.getExistingDirectory(self, 'Выберите папку для нового датасета')
+        self.destination_folder = QtWidgets.QFileDialog.getExistingDirectory(
+            self, 'Выберите папку для нового датасета')
         if self.destination_folder:
             self.menu = SubWindow(self)
             self.menu.show()
-    
+
     def find_course(self, main_date) -> None:
         """
             function for course output
@@ -92,7 +94,7 @@ class SubWindow(QtWidgets.QDialog):
     def __init__(self, Main: Window = None) -> None:
         super(SubWindow, self).__init__(Main)
         self.setModal(True)
-        
+        self.main_window = Main
         if Main is not None:
             self.Main = Main
 
@@ -115,7 +117,8 @@ class SubWindow(QtWidgets.QDialog):
         """
             creating x and y datasets
         """
-        get_usd1()
+        get_usd1(self.main_window.folderpath,
+                 self.main_window.destination_folder)
         QtWidgets.QMessageBox.information(self, 'Датасет создан')
         self.close()
 
@@ -123,7 +126,8 @@ class SubWindow(QtWidgets.QDialog):
         """
             creating a dataset by year
         """
-        get_usd2()
+        get_usd2(self.main_window.folderpath,
+                 self.main_window.destination_folder)
         QtWidgets.QMessageBox.information(self, 'Датасет создан')
         self.close()
 
@@ -131,9 +135,12 @@ class SubWindow(QtWidgets.QDialog):
         """
             creating a dataset by week
         """
-        get_usd3()
+        get_usd3(self.main_window.folderpath,
+                 self.main_window.destination_folder)
         QtWidgets.QMessageBox.information(self, 'Датасет создан')
         self.close()
+
+
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     window = Window()

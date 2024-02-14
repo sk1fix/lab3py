@@ -54,8 +54,8 @@ def get_normalname(my_date: str) -> str:
 #             if str(my_date) == str(begining_data):
 #                 current_datef = get_cur_date(my_date)
 #             my_date -= datetime.timedelta(days=1)
-def get_usd2() -> None:
-    f = open('data.csv', 'r', encoding="utf-8")
+def get_usd2(path: str, path1: str) -> None:
+    f = open(path, 'r', encoding="utf-8")
     s = csv.reader(f)
     index = 0
     for row in s:
@@ -67,7 +67,7 @@ def get_usd2() -> None:
             print(True)
             current_datef = begining_datef-datetime.timedelta(days=1)
             begining_datef = datetime.date(int(row[0][6:10]), 1, 1)
-        with open(get_normalname(str(begining_datef)) + "_" + get_normalname(str(current_datef)) + '.csv', 'a', newline='', encoding="utf-8") as file:
+        with open(path1 + "/" + get_normalname(str(begining_datef)) + "_" + get_normalname(str(current_datef)) + '.csv', 'a', newline='', encoding="utf-8") as file:
             wr = csv.writer(file)
             wr.writerow(row[0].split(',') + row[1].split(','))
 

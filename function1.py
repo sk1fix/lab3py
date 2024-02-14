@@ -35,11 +35,11 @@ import csv
 #                 my_date -= datetime.timedelta(days=1)
 
 
-def get_usd1(path: str) -> None:
+def get_usd1(path: str, path1: str) -> None:
     f = open(path, 'r', encoding="utf-8")
     s = csv.reader(f)
-    with open('X.csv', 'w', newline='', encoding="utf-8") as xfile:
-        with open('Y.csv', 'w', newline='', encoding="utf-8") as yfile:
+    with open(path1 + '/X.csv', 'w', newline='', encoding="utf-8") as xfile:
+        with open(path1 + '/Y.csv', 'w', newline='', encoding="utf-8") as yfile:
             for row in s:
                 wrx = csv.writer(xfile)
                 wry = csv.writer(yfile)
