@@ -9,7 +9,7 @@ from function3 import get_usd3
 
 
 class Window(QtWidgets.QMainWindow):
-    def __init__(self):
+    def __init__(self) -> None: 
         super().__init__()
         self.folderpath = None
         self.menu = None
@@ -40,14 +40,20 @@ class Window(QtWidgets.QMainWindow):
         central_widget.setLayout(layout)
         self.setCentralWidget(central_widget)
 
-    def select_folder(self):
+    def select_folder(self) -> None:
+        """
+            a function for selecting a folder
+        """
         self.folderpath = QtWidgets.QFileDialog.getExistingDirectory(
             self, 'Выберите папку')
         QtWidgets.QMessageBox.information(
             self, 'Папка выбрана', self.folderpath)
         self.folderpath += "/data.csv"
 
-    def get_date(self):
+    def get_date(self) -> None:
+        """
+            choosing a date and receiving a subsequent course
+        """
         if not self.folderpath:
             QtWidgets.QMessageBox.warning(
                 self, 'Ошибка', 'Выберите папку с исходным файлом')
@@ -56,7 +62,10 @@ class Window(QtWidgets.QMainWindow):
         main_date = self.date_input.date().toString(QtCore.Qt.ISODate)
         self.find_course(main_date)
 
-    def create_dataset(self):
+    def create_dataset(self) -> None:
+        """
+            selecting a folder for a new dataset
+        """
         if not self.folderpath:
             QtWidgets.QMessageBox.warning(self, 'Ошибка', 'Выберите папку с исходным датасетом')
             return
@@ -66,8 +75,11 @@ class Window(QtWidgets.QMainWindow):
             self.menu = SubWindow(self)
             self.menu.show()
     
-    def find_course(self, main_date):
-        course = get_usd(main_date)
+    def find_course(self, main_date) -> None:
+        """
+            function for course output
+        """
+        course = get_usd(main_date, self.folderpath)
         if course == None:
             QtWidgets.QMessageBox.information(
                 self, 'Данные не получены', f'Курса доллара на {main_date} нет')
@@ -77,10 +89,10 @@ class Window(QtWidgets.QMainWindow):
 
 
 class SubWindow(QtWidgets.QDialog):
-    def __init__(self, Main: Window = None):
+    def __init__(self, Main: Window = None) -> None:
         super(SubWindow, self).__init__(Main)
         self.setModal(True)
-
+        
         if Main is not None:
             self.Main = Main
 
@@ -99,17 +111,26 @@ class SubWindow(QtWidgets.QDialog):
 
         self.setLayout(layout)
 
-    def but1(self):
+    def but1(self) -> None:
+        """
+            creating x and y datasets
+        """
         get_usd1()
         QtWidgets.QMessageBox.information(self, 'Датасет создан')
         self.close()
 
-    def but2(self):
+    def but2(self) -> None:
+        """
+            creating a dataset by year
+        """
         get_usd2()
         QtWidgets.QMessageBox.information(self, 'Датасет создан')
         self.close()
 
-    def but3(self):
+    def but3(self) -> None:
+        """
+            creating a dataset by week
+        """
         get_usd3()
         QtWidgets.QMessageBox.information(self, 'Датасет создан')
         self.close()

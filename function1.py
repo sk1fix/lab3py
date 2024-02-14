@@ -35,8 +35,8 @@ import csv
 #                 my_date -= datetime.timedelta(days=1)
 
 
-def get_usd1() -> None:
-    f = open('data.csv', 'r', encoding="utf-8")
+def get_usd1(path: str) -> None:
+    f = open(path, 'r', encoding="utf-8")
     s = csv.reader(f)
     with open('X.csv', 'w', newline='', encoding="utf-8") as xfile:
         with open('Y.csv', 'w', newline='', encoding="utf-8") as yfile:
@@ -45,5 +45,3 @@ def get_usd1() -> None:
                 wry = csv.writer(yfile)
                 wrx.writerow(row[0].split(','))
                 wry.writerow(row[1].split(','))
-
-

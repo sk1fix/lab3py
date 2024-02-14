@@ -2,8 +2,8 @@ import datetime
 import csv
 
 
-def get_usd(my_date: datetime.date) -> str:
-    f = open('data.csv', 'r')
+def get_usd(my_date: datetime.date, path: str) -> str:
+    f = open(path, 'r')
     s = csv.reader(f)
     for row in s:
         if str(row[0][10:20]) == str(my_date):
